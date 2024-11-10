@@ -2,8 +2,8 @@ using System;
 using UnityEngine;
 
 namespace Kutie {
-    public class SingletonObject<T> : ScriptableObject
-        where T : SingletonObject<T>
+    public class SingletonScriptableObject<T> : ScriptableObject
+        where T : SingletonScriptableObject<T>
     {
         public static T Instance { get; private set; }
 

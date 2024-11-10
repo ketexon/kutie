@@ -8,7 +8,7 @@ namespace Kutie {
     /// </summary>
     /// <typeparam name="T">Child class</typeparam>
     public abstract class SingletonMonoBehaviour<T> : MonoBehaviour
-        where T : SingletonBehaviour<T>
+        where T : SingletonMonoBehaviour<T>
     {
         public static T Instance { get; private set; }
 
