@@ -36,5 +36,4 @@ This library provides functions to normalize angles and clamp them.
 ### Other Utilities
 
 This library provides a utility to create and start a Coroutine from 
-a `System.Action` to wait 1 frame. This is useful to "defer" a call
-like in Godot.
+a `System.Action` after waiting for a yield instruction. 

@@ -58,7 +58,7 @@ namespace Kutie {
 
     public static class AngleUtil {
         public static float Normalize360(float angle) => (angle % 360 + 360) % 360;
-        public static float Normalize180(float angle) => NormalizeAngle360(angle + 180) - 180;
+        public static float Normalize180(float angle) => Normalize360(angle + 180) - 180;
 
         static public float ClampAngle(float angle, float min, float max)
         {
