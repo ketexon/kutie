@@ -2,22 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 namespace Kutie {
-    public static class Extensions {
-        public static Coroutine WaitOneFrame(this MonoBehaviour behaviour, System.Action action)
-        {
-            IEnumerator Impl()
-            {
-                yield return null;
-                action();
-            }
-            return behaviour.StartCoroutine(Impl());
-        } 
-
-        public static bool Contains(this LayerMask mask, int layer)
-        {
-            return (mask & 1 << layer) > 0;
-        }
-
+    public static class VectorUtil {
         public static Vector3 ProjectXZ(this Vector3 v)
         {
             return new Vector3(v.x, 0, v.z);
@@ -69,14 +54,16 @@ namespace Kutie {
             (max - min).y * UnityEngine.Random.value,
             (max - min).z * UnityEngine.Random.value
         ) + min;
+    }
 
-        public static float NormalizeAngle360(float angle) => (angle % 360 + 360) % 360;
-        public static float NormalizeAngle180(float angle) => NormalizeAngle360(angle + 180) - 180;
+    public static class AngleUtil {
+        public static float Normalize360(float angle) => (angle % 360 + 360) % 360;
+        public static float Normalize180(float angle) => NormalizeAngle360(angle + 180) - 180;
 
         static public float ClampAngle(float angle, float min, float max)
         {
-            float minNormalized = NormalizeAngle180(min - angle);
-            float maxNormalized = NormalizeAngle180(max - angle);
+            float minNormalized = Normalize180(min - angle);
+            float maxNormalized = Normalize180(max - angle);
 
             if (minNormalized <= 0 && maxNormalized >= 0)
             {
@@ -85,6 +72,23 @@ namespace Kutie {
             if (Mathf.Abs(minNormalized) <= Mathf.Abs(maxNormalized))
                 return min;
             return max;
+        }
+    }
+
+    public static class Extensions {
+        public static Coroutine Defer(this MonoBehaviour behaviour, System.Action action, YieldInstruction yieldInstruction = null)
+        {
+            IEnumerator Impl()
+            {
+                yield return yieldInstruction;
+                action();
+            }
+            return behaviour.StartCoroutine(Impl());
+        } 
+
+        public static bool Contains(this LayerMask mask, int layer)
+        {
+            return (mask & 1 << layer) > 0;
         }
 
         static public string ToHex(this Color color, bool includeAlpha = true)
