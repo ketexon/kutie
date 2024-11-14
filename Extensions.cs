@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Kutie {
     public static class VectorUtil {
@@ -104,6 +105,57 @@ namespace Kutie {
             string as_ = $"{a:X}".PadLeft(2, '0');
 
             return includeAlpha ? $"{rs}{gs}{bs}{as_}" : $"{rs}{gs}{bs}";
+        }
+    }
+
+    public static class PhysicsUtil
+    {
+        public class RaycastDistanceComparer : IComparer<RaycastHit>
+        {
+            public int Compare(RaycastHit a, RaycastHit b)
+            {
+                return a.distance < b.distance ? -1 : 1;
+            }
+        }
+
+        public static int RaycastNonAllocSorted(
+            Vector3 origin,
+            Vector3 direction,
+            RaycastHit[] results,
+            float maxDistance = float.PositiveInfinity,
+            int layerMask = Physics.DefaultRaycastLayers,
+            QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal
+        )
+        {
+            int nHits = Physics.RaycastNonAlloc(
+                origin, direction, 
+                results, 
+                maxDistance, 
+                layerMask, 
+                queryTriggerInteraction
+            );
+            System.Array.Sort(results, 0, nHits, new RaycastDistanceComparer());
+
+            return nHits;
+        }
+
+        public static RaycastHit[] RaycastAllSorted(
+            Vector3 origin,
+            Vector3 direction,
+            float maxDistance = float.PositiveInfinity,
+            int layerMask = Physics.DefaultRaycastLayers,
+            QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal
+        )
+        {
+            var hits = Physics.RaycastAll(
+                origin, direction,
+                maxDistance,
+                layerMask,
+                queryTriggerInteraction
+            );
+            System.Array.Sort(hits, new RaycastDistanceComparer());
+
+            return hits;
         }
     }
 }
