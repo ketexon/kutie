@@ -33,7 +33,20 @@ This library provides extensions and utility functions in `Kutie.VectorUtil` to
 
 This library provides functions to normalize angles and clamp them.
 
-### Other Utilities
+### MonoBehaviour
 
-This library provides a utility to create and start a Coroutine from 
-a `System.Action` after waiting for a yield instruction. 
+`MonoBehaviour` is extended to contain a function `Defer` to call a `System.Action` after a certain `YieldInstruction`.
+
+Eg.
+
+```c#
+void Awake(){
+	Defer(() => { Destroy(gameObject); }, new WaitForSeconds(5));
+}
+```
+
+## Utilities
+
+### Physics
+
+`Kutie.PhysicsUtil` contains static functions to do sorted Ray/Box casts (non-allocating and allocating), by default sorting by distance.
