@@ -25,6 +25,7 @@ namespace Kutie {
                 if (DestroyNewInstance)
                 {
                     Destroy(gameObject);
+                    return;
                 }
                 else
                 {
