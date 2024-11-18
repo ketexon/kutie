@@ -20,6 +20,9 @@ namespace Kutie {
         public static Vector2 YZ(this Vector3 v) => new(v.y, v.z);
 
 
+        public static Vector2 WithX(this Vector2 v, float x) => new(x, v.y);
+        public static Vector2 WithY(this Vector2 v, float y) => new(v.x, y);
+
         public static Vector3 WithZ(this Vector2 v, float z) => new(v.x, v.y, z);
 
         public static Vector3 WithX(this Vector3 v, float x) => new(x, v.y, v.z);
