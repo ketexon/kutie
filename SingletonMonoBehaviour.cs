@@ -10,6 +10,7 @@ namespace Kutie {
     public abstract class SingletonMonoBehaviour<T> : MonoBehaviour
         where T : SingletonMonoBehaviour<T>
     {
+        public static UnityEngine.Events.UnityEvent<T> NewInstanceEvent = new();
         public static T Instance { get; private set; }
 
         /// <summary>
@@ -33,6 +34,7 @@ namespace Kutie {
                 }
             }
             Instance = this as T;
+            NewInstanceEvent.Invoke(Instance);
         }
     }
 }
