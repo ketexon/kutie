@@ -1,0 +1,24 @@
+{
+	"name": "com.ketexon.kutie",
+	"version": "0.0.1",
+	"displayName": "Kutie",
+	"description": "Ketexon's Utility Package",
+	"unity": "2022.3",
+	"unityRelease": "38f1",
+	"dependencies": {},
+	"keywords": [
+		"utility"
+	],
+	"author": {
+		"name": "Aubrey Clark (ketexon)",
+		"email": "zane.a.s.clark@gamil.com",
+		"url": "https://ketexon.xyz"
+	},
+	"samples": [
+		{
+			"displayName": "TimeLayer",
+			"description": "Sample for the TimerLayerSO ScriptableObject",
+			"path": "Samples~/TimeLayer"
+		}
+	]
+}

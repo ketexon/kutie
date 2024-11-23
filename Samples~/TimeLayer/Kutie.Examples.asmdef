@@ -1,0 +1,16 @@
+{
+    "name": "Kutie.Examples.TimeLayer",
+    "rootNamespace": "Kutie.Examples.TimeLayer",
+    "references": [
+        "GUID:38d42bec27fedf6caa272495cfd9708c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
