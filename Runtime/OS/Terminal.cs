@@ -61,6 +61,8 @@ namespace Kutie.OS
             }
 
             return null;
+#else
+            throw new System.NotImplementedException("Platform not supported");
 #endif
         }
     }

@@ -1,7 +1,6 @@
 using UnityEngine;
 
 namespace Kutie {
-
 	public class SpringTransform : MonoBehaviour {
 		[SerializeField] Transform target;
 		[SerializeField] float _frequency = 1.0f;
@@ -46,7 +45,7 @@ namespace Kutie {
 
 		void Update() {
 			Spring.TargetValue = target.position;
-			Spring.Update(Time.deltaTime);
+			Spring.Update(UnityEngine.Time.deltaTime);
 			transform.position = Spring.CurrentValue;
 		}
 	}

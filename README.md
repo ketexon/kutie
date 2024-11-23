@@ -5,6 +5,12 @@ should be in Unity or C#, but aren't.
 
 I organized the features into many assemblies, so if you only want some, you can only take some!
 
+## Recommended Use
+
+*DO NOT USE* `using Kutie;`. This library is designed to overlap with the Unity namespace heavily. Whenver you need a utility
+from Kutie, write out `Kutie.[utility]`. You can also alias `Kutie` if 5 letters is too long: `using K = Kutie;` (and you can do this
+for static classes too: `using KP = Kutie.Physics;`).
+
 ## Editor
 
 ### CommandPromptEditor
@@ -143,3 +149,7 @@ This class might be very bad practice! Try to find other ways to structure your 
 `TimeLayer` is a class that follows `Time.time` but allows pausing. Similarly, `ScalableTimeLayer` does the same but allows time scaling. These are meant to be used somewhat instead of `Time.timeScale`, however they do not affect any Unity systems like `Physics`.
 
 In addition, there are two ScriptableObjects that act as containers for TimeLayers.
+
+## Object
+
+- `class Kutie.ObjectComparer : IComparer<UnityEngine.Object>`: class that implements `IComparer<UnityEngine.Object>` using `Object.GetInstanceID()`. You can use this to, for example, store Objects in a BST (`SortedSet<T>`) instead of a `HashSet<T>`.

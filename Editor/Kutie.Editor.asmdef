@@ -1,8 +1,12 @@
 {
-    "name": "Kutie.Math",
-    "rootNamespace": "Kutie",
-    "references": [],
-    "includePlatforms": [],
+    "name": "Kutie.Editor",
+    "rootNamespace": "Kutie.Editor",
+    "references": [
+        "GUID:2f52713382b2924468155a01869e851c"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
