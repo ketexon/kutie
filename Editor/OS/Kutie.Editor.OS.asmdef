@@ -1,5 +1,5 @@
 {
-    "name": "Kutie.Editor",
+    "name": "Kutie.Editor.OS",
     "rootNamespace": "",
     "references": [
         "GUID:0a6ee9c2e0e2b731599e460e3587e547"
