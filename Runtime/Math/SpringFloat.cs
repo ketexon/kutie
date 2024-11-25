@@ -3,13 +3,21 @@ using UnityEngine;
 namespace Kutie {
 	/// <summary>
 	/// Adapted from https://www.youtube.com/watch?v=KPoeNZZ6H4s
+	/// Now wouldn't it be great if C# 9 had generics with constraints on primitive types
+	/// so I didn't have to copy paste this code from SpringVector3 :pensive:
 	/// </summary>
-	public class SpringVector3 : ISpringValue<Vector3, Vector3> {
-		public Vector3 CurrentValue { get; private set; }
-		public Vector3 TargetValue { get; set; }
-		public Vector3 Velocity { get; set; }
+	[System.Serializable]
+	public class SpringFloat : ISpringValue<float, float> {
+		[SerializeField]
+		float _currentValue;
+		[SerializeField]
+		float _targetValue;
 
-		Vector3 previousTargetValue;
+		public float CurrentValue { get => _currentValue; private set => _currentValue = value; }
+		public float TargetValue { get => _targetValue; set => _targetValue = value; }
+		public float Velocity { get; set; }
+
+		float previousTargetValue;
 
 		// y + 2 * zeta/omega * y' + 1/omega^2 * y'' = x + r*zera/omega * x'
 		// k1 = 2*zeta / omega
@@ -18,7 +26,9 @@ namespace Kutie {
 		// omega = 1 / sqrt(k2)
 		// zeta = k1 * omega / 2
 		// r = 2 * k3 / k1
+		[SerializeField]
 		float _k1, _k2, _k3;
+		[SerializeField]
 		float _omega, _zeta, _r;
 
 		public float K1 {
@@ -72,17 +82,21 @@ namespace Kutie {
 		// for pole matching
 		float d;
 
-		public SpringVector3(Vector3 initialValue, float omega, float zeta, float r) {
+		public SpringFloat(float initialValue, SpringParameters parameters) {
 			CurrentValue = initialValue;
 			TargetValue = initialValue;
 			previousTargetValue = initialValue;
-			Velocity = Vector3.zero;
+			Velocity = 0;
 
-			SetParameters(omega, zeta, r);
+			SetParameters(parameters);
 		}
 
-		public SpringVector3 Clone(){
-			return new SpringVector3(CurrentValue, Omega, Zeta, R);
+		public SpringFloat Clone(){
+			return new SpringFloat(CurrentValue, new SpringParameters(){
+				Omega = Omega,
+				DampingCoefficient = Zeta,
+				Responsiveness = R
+			});
 		}
 
 		public void SetConstants(float k1, float k2, float k3) {
@@ -115,7 +129,8 @@ namespace Kutie {
 
 		public void LockToTarget() {
 			CurrentValue = TargetValue;
-			Velocity = Vector3.zero;
+			previousTargetValue = TargetValue;
+			Velocity = 0;
 		}
 
 		void UpdatePoleMatchingConstant(){
@@ -123,7 +138,7 @@ namespace Kutie {
 		}
 
 		public void Update(float deltaTime) {
-			Vector3 targetValueDot = (TargetValue - previousTargetValue)/deltaTime;
+			float targetValueDot = (TargetValue - previousTargetValue)/deltaTime;
 			previousTargetValue = TargetValue;
 
 			float k1Stable, k2Stable;

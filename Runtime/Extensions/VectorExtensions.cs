@@ -8,7 +8,6 @@ namespace Kutie.Extensions
         public static Vector3 ProjectXY(this Vector3 v) => new(v.x, v.y, 0);
         public static Vector3 ProjectYZ(this Vector3 v) => new(0, v.y, v.z);
 
-
         public static Vector3 Abs(this Vector3 v)
         {
             return new Vector3(Mathf.Abs(v.x), Mathf.Abs(v.y), Mathf.Abs(v.z));

@@ -72,10 +72,10 @@ This is useful to smoothly transition from one point to another in real time usi
 
 ```c#
 SpringVector3 springVector = new(
-	initialValue: Vector3.zero,
-	omega: 2*Mathf.PI, // angular velocity (frequency)
-	zeta: 1, // damping coefficient (0 = undamped, (0,1) = damped, 1 = critically damped, (1,infty) = underdamped)
-	r: 0 // responsitivity: positive = velocity starts in right direction, negative values = velocity starts in opposite direction
+ initialValue: Vector3.zero,
+ omega: 2*Mathf.PI, // angular velocity (frequency)
+ zeta: 1, // damping coefficient (0 = undamped, (0,1) = damped, 1 = critically damped, (1,infty) = underdamped)
+ r: 0 // responsitivity: positive = velocity starts in right direction, negative values = velocity starts in opposite direction
 );
 
 springVector.TargetValue = Vector3.one;
@@ -85,6 +85,8 @@ Debug.Log(springVector.CurrentValue);
 ```
 
 `SpringTransform` does this automatically to the current transform with the `TargetValue` set to the position of the `Target` transform. In addition, it provides an editor to preview the value changing, and allows you to change the values of `SpringVector3` at runtime.
+
+Similarly, there is `SpringFloat` and `SpringFloatValue` (a `MonoBehaviour` container for `SpringFloat`).
 
 ## OS
 
@@ -119,14 +121,14 @@ Example use:
 ```c#
 public class PlayerMovement : SingletonMonoBehaviour<T>
 {
-	Camera camera;
+ Camera camera;
 
-	// make sure to override Awake
-	protected override void Awake(){
-		base.Awake();
+ // make sure to override Awake
+ protected override void Awake(){
+  base.Awake();
 
-		camera = Camera.main;
-	}
+  camera = Camera.main;
+ }
 }
 ```
 
