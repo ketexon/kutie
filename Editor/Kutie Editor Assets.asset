@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c40e8ccd2698f8468f3c3d81dd03e97, type: 3}
+  m_Name: Kutie Editor Assets
+  m_EditorClassIdentifier: 
+  Warning: {fileID: 21300000, guid: 9a5055a2def0337488c0b1de07d3a5a4, type: 3}
