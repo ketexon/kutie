@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Kutie {
+namespace Kutie.Extensions {
 	public static class CollectionExtensions {
 		public static T Sample<T>(this IList<T> list) {
 			return list[UnityEngine.Random.Range(0, list.Count)];
