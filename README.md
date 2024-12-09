@@ -6,13 +6,18 @@ should be in Unity or C#, but aren't.
 ## Highlights
 
 - Adds "Open in Terminal" to the project pane (this was the reason I started this library lol)
+![image](https://github.com/user-attachments/assets/80bdb9a1-544a-4fa7-ab45-6de116a439bf)
+
 - Adds `LayerMask.Contains` extension to detect if a layermask contains a layer
 - Tons of vector extensions
   - Adds pure functions to modify Vector components (eg. `WithZ`) (useful for modifying components of properties like `transform.position` without a temporary varibale)
   - Component-wise operations (`Hammard`, `Div`, `Rem`, `Abs`)
   - Projections (`Vector3.ProjectXZ()`) and swizzling (`Vector3.XZ()`)
 - `SingletonMonobehaviour` and `SingletonScriptableObject`
-- Spring values for animation/more customizable `SmoothDamp`/`Lerp`
+- Spring values for animation/more customizable `SmoothDamp`/`Lerp`![Unity_UxDgTvCmXs](https://github.com/user-attachments/assets/1d67c66f-da3a-451f-b493-e9b6b73bb676)
+![Unity_A9eQRlAMZN](https://github.com/user-attachments/assets/074a7294-1278-4f4b-82c3-d0ed64e1e04f)
+![Unity_tmOm2Xe9UJ](https://github.com/user-attachments/assets/e9d2b9a8-00c2-44a9-9c2c-ac6733cb8933)
+
 - [PID controller](https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_controller) for AI
 - Sorted `Physics` queries
 
