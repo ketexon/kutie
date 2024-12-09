@@ -51,7 +51,7 @@ namespace Kutie {
 		public float Update(float dt) {
 			float error = TargetValue - CurrentValue;
 			if(Parameters.Angle) {
-				error = Math.NormalizeAngle180(error);
+				error = KMath.NormalizeAngle180(error);
 			}
 
 			float P = Parameters.ProportionalGain * error;
@@ -66,12 +66,12 @@ namespace Kutie {
 				if(Parameters.DerivativeMode == PIDControllerDerivativeMode.Value) {
 					delta = -(CurrentValue - lastValue);
 					if(Parameters.Angle) {
-						delta = Math.NormalizeAngle180(delta);
+						delta = KMath.NormalizeAngle180(delta);
 					}
 				} else {
 					delta = error - lastError;
 					if(Parameters.Angle) {
-						delta = Math.NormalizeAngle180(delta);
+						delta = KMath.NormalizeAngle180(delta);
 					}
 				}
 				D = Parameters.DerivativeGain * delta / dt;

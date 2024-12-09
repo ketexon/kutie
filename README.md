@@ -3,13 +3,18 @@
 Kutie is a drop-in utilities library for Unity whose purpose is to provide small features that I think
 should be in Unity or C#, but aren't.
 
-I organized the features into many assemblies, so if you only want some, you can only take some!
+## Highlights
 
-## Recommended Use
-
-*DO NOT USE* `using Kutie;`. This library is designed to overlap with the Unity namespace heavily. Whenver you need a utility
-from Kutie, write out `Kutie.[utility]`. You can also alias `Kutie` if 5 letters is too long: `using K = Kutie;` (and you can do this
-for static classes too: `using KP = Kutie.Physics;`).
+- Adds "Open in Terminal" to the project pane (this was the reason I started this library lol)
+- Adds `LayerMask.Contains` extension to detect if a layermask contains a layer
+- Tons of vector extensions
+  - Adds pure functions to modify Vector components (eg. `WithZ`) (useful for modifying components of properties like `transform.position` without a temporary varibale)
+  - Component-wise operations (`Hammard`, `Div`, `Rem`, `Abs`)
+  - Projections (`Vector3.ProjectXZ()`) and swizzling (`Vector3.XZ()`)
+- `SingletonMonobehaviour` and `SingletonScriptableObject`
+- Spring values for animation/more customizable `SmoothDamp`/`Lerp`
+- [PID controller](https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_controller) for AI
+- Sorted `Physics` queries
 
 ## Editor
 
@@ -32,6 +37,7 @@ the `Kutie.OS.Executable.Which` command.
 ### ColorExtensions
 
 - `string Color.ToHex(bool includeHex = true)`
+- `Color Color.WithA(float a)`
 
 ### LayerMaskExtensions
 
@@ -43,18 +49,46 @@ the `Kutie.OS.Executable.Which` command.
 
 ### VectorExtensions
 
+Projections
 - `Vector3 Vector3.ProjectXY(), Vector3.ProjectXZ(), Vector3.ProjectYZ()`: Projects onto plane. Eg. `(1,2,3).ProjectXZ() == (1,0,2)`. Useful in 2D for projecting onto the 2D plane, and useful in 3D for projecting onto the ground, etc.
-- `Vector3 Vector3.Abs()`: Component-wise absolute value
 - `Vector2 Vector3.XY(), Vector3.XZ(), Vector3.YZ()`: Swizzling. Eg. `(1,2,3).XZ() == (1,3)`
-- `Vector3 Vector3.WithX(), Vector3.WithY(), Vector3.WithZ()`: same as copying and setting the `x,y,z` value.
+
+Mutators
+- `Vector3 Vector3.WithX(), Vector3.WithY(), Vector3.WithZ()`
 - `Vector2 Vector2.WithX(), Vector2.WithY()`
 - `Vector3 Vector2.WithZ()`
-- `float Vector3.Volume()`: Finds the volume of a box with side lengths in the vector (note: NOT half lengths as used by `BoxCollider`)
+
+Geomtry
+- `float Vector3.Volume(), int Vector3Int.Volume()`
+  - Finds the volume of a box with side lengths in the vector (note: NOT half lengths as used by `BoxCollider`)
+
+Component-wise operations
+- `Vector3 Vector3.Abs()`: Component-wise absolute value
+- Division
+  - `Vector2 Vector2.Divide(Vector2 b), Vector2.Divide(Vector2Int b)`
+  - `Vector2Int Vector2Int.Divide(Vector2Int b)`
+  - `Vector2 Vector2.Divide(Vector2 b), Vector2.Divide(Vector2Int b)`
+  - `Vector3 Vector3.Divide(Vector3 b), Vector3.Divide(Vector3Int b)`
+  - `Vector3Int Vector3Int.Divide(Vector3Int b)`
+  - `Vector3 Vector3Int.Divide(Vector3 b)`
+- Multiplication (Hammard product)
+  - `Vector2 Vector2.Hammard(Vector2 b), Vector2.Hammard(Vector2Int b)`
+  - `Vector2Int Vector2Int.Hammard(Vector2Int b)`
+  - `Vector2 Vector2Int.Hammard(Vector2 b)`
+  - `Vector3 Vector3.Hammard(Vector3 b), Vector3.Hammard(Vector3Int b)`
+  - `Vector3Int Vector3Int.Hammard(Vector3Int b)`
+  - `Vector3 Vector3Int.Hammard(Vector3 b)`
+- Rem (Modulo)
+  - `Vector3Int Vector3Int.Rem(Vector3Int b), Vector3Int.Rem(int b)`
+  - `Vector3 Vector3.Rem(Vector3 b), Vector3.Rem(float b)`
 
 ## Math
 
 ### Math
 
+- `class IntRange`
+  - Contains `Min, MaxExclusive`, as well as getters `Max = MaxInclusive`
+  - Contains `IntRange.Random`, which will sample the range
 - `Vector3 Math.Min(Vector3 v1, Vector3 v2)`: Component-wise min
 - `Vector3 Math.Max(Vector3 v1, Vector3 v2)`: Component-wise max
 - `float Rem(float a, float b), int Rem(int a, int b)`: Computed euclidean remainder (nonnegative equivalent to `a % b`). You can be sure that `a % c == b % c` if they have the same remainder, regardless of if they are negative.

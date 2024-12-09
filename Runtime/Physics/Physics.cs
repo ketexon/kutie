@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Kutie
 {
-    public static class Physics
+    public static class KPhysics
     {
         public class RaycastDistanceComparer : IComparer<RaycastHit>
         {

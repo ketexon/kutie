@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Kutie
 {
-    public static class Random
+    public static class KRandom
     {
         /// <summary>
         /// Returns a random vector between two vectors.
