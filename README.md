@@ -21,6 +21,17 @@ should be in Unity or C#, but aren't.
 - [PID controller](https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_controller) for AI
 - Sorted `Physics` queries
 
+## Installation
+
+The best way to install Kutie is to add it as a package using the Package Manage window.
+
+- Open the package manager
+![image](https://github.com/user-attachments/assets/5fdf59eb-e375-4e0d-9cc0-4b844ab4d072)
+- Install package from git url (add .git to the end: `https://github.com/ketexon/kutie.git`)
+![image](https://github.com/user-attachments/assets/6e7ef4ca-adc6-49d8-828e-85c76c0ec70a)
+
+It will also work if you just put the repo into `Assets` or into `Packages/com.ketexon.kutie`. If you are using git for version control, use a submodule: `git submodule add https://github.com/ketexon/kutie <optional_destination_dir>`. Otherwise, you can just `git clone https://github.com/ketexon/kutie`.
+
 ## Editor
 
 ### CommandPromptEditor
