@@ -33,5 +33,32 @@ namespace Kutie.Extensions
         public static Vector3 WithYZ(this Vector3 v, Vector2 yz) => new(v.x, yz.x, yz.y);
 
         public static float Volume(this Vector3 length) => length.x * length.y * length.z;
+        public static int Volume(this Vector3Int length) => length.x * length.y * length.z;
+
+        public static Vector2 Hammard(this Vector2 a, Vector2 b) => new(a.x * b.x, a.y * b.y);
+        public static Vector2 Hammard(this Vector2 a, Vector2Int b) => new(a.x * b.x, a.y * b.y);
+        public static Vector2Int Hammard(this Vector2Int a, Vector2Int b) => new(a.x * b.x, a.y * b.y);
+        public static Vector2 Hammard(this Vector2Int a, Vector2 b) => new(a.x * b.x, a.y * b.y);
+
+        public static Vector3 Hammard(this Vector3 a, Vector3 b) => new(a.x * b.x, a.y * b.y, a.z * b.z);
+        public static Vector3 Hammard(this Vector3 a, Vector3Int b) => new(a.x * b.x, a.y * b.y, a.z * b.z);
+        public static Vector3Int Hammard(this Vector3Int a, Vector3Int b) => new(a.x * b.x, a.y * b.y, a.z * b.z);
+        public static Vector3 Hammard(this Vector3Int a, Vector3 b) => new(a.x * b.x, a.y * b.y, a.z * b.z);
+
+        public static Vector2 Divide(this Vector2 a, Vector2 b) => new(a.x / b.x, a.y / b.y);
+        public static Vector2 Divide(this Vector2 a, Vector2Int b) => new(a.x / b.x, a.y / b.y);
+        public static Vector2Int Divide(this Vector2Int a, Vector2Int b) => new(a.x / b.x, a.y / b.y);
+        public static Vector2 Divide(this Vector2Int a, Vector2 b) => new(a.x / b.x, a.y / b.y);
+
+        public static Vector3 Divide(this Vector3 a, Vector3 b) => new(a.x / b.x, a.y / b.y, a.z / b.z);
+        public static Vector3 Divide(this Vector3 a, Vector3Int b) => new(a.x / b.x, a.y / b.y, a.z / b.z);
+        public static Vector3Int Divide(this Vector3Int a, Vector3Int b) => new(a.x / b.x, a.y / b.y, a.z / b.z);
+        public static Vector3 Divide(this Vector3Int a, Vector3 b) => new(a.x / b.x, a.y / b.y, a.z / b.z);
+
+        public static Vector3Int Rem(this Vector3Int a, Vector3Int b) => new(a.x % b.x, a.y % b.y, a.z % b.z);
+        public static Vector3Int Rem(this Vector3Int a, int b) => new(a.x % b, a.y % b, a.z % b);
+
+        public static Vector3 Rem(this Vector3 a, Vector3 b) => new(a.x % b.x, a.y % b.y, a.z % b.z);
+        public static Vector3 Rem(this Vector3 a, float b) => new(a.x % b, a.y % b, a.z % b);
     }
 }

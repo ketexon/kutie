@@ -4,7 +4,7 @@ namespace Kutie.Extensions
 {
     public static class ColorExtensions
     {
-        static public string ToHex(this Color color, bool includeAlpha = true)
+        public static string ToHex(this Color color, bool includeAlpha = true)
         {
             byte r = (byte) (255 * color.r);
             byte g = (byte) (255 * color.g);
@@ -18,5 +18,7 @@ namespace Kutie.Extensions
 
             return includeAlpha ? $"{rs}{gs}{bs}{as_}" : $"{rs}{gs}{bs}";
         }
+
+        public static Color WithA(this Color color, float a) => new Color(color.r, color.g, color.b, a);
     }
 }
