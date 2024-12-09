@@ -59,5 +59,8 @@ namespace Kutie.Extensions
 
         public static Vector3 Rem(this Vector3 a, Vector3 b) => new(a.x % b.x, a.y % b.y, a.z % b.z);
         public static Vector3 Rem(this Vector3 a, float b) => new(a.x % b, a.y % b, a.z % b);
+
+        public static Vector2Int RoundToInt(this Vector2 v) => Vector2Int.RoundToInt(v);
+        public static Vector3Int RoundToInt(this Vector3 v) => Vector3Int.RoundToInt(v);
     }
 }
