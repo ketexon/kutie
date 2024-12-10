@@ -1,4 +1,5 @@
 namespace Kutie {
+	[System.Serializable]
 	public class IntRange {
 		public int Min;
 		public int MaxExclusive;

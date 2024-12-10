@@ -22,5 +22,13 @@ namespace Kutie.Extensions {
             }
 			return list;
 		}
+
+		public static IEnumerable<(int, T)> ZipIndex<T>(this IEnumerable<T> list) {
+			int i = 0;
+			foreach (var item in list) {
+				yield return (i, item);
+				i++;
+			}
+		}
 	}
 }

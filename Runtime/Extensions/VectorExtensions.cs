@@ -17,6 +17,28 @@ namespace Kutie.Extensions
         public static Vector2 XZ(this Vector3 v) => new(v.x, v.z);
         public static Vector2 YZ(this Vector3 v) => new(v.y, v.z);
 
+        public static Vector2Int XY(this Vector3Int v) => new(v.x, v.y);
+        public static Vector2Int XZ(this Vector3Int v) => new(v.x, v.z);
+        public static Vector2Int YZ(this Vector3Int v) => new(v.y, v.z);
+
+        public static Vector3 XYZ(this Vector3 v) => v;
+        public static Vector3Int XYZ(this Vector3Int v) => v;
+
+        public static Vector3 XZY(this Vector3 v) => new(v.x, v.z, v.y);
+        public static Vector3Int XZY(this Vector3Int v) => new(v.x, v.z, v.y);
+
+        public static Vector3 YXZ(this Vector3 v) => new(v.y, v.x, v.z);
+        public static Vector3Int YXZ(this Vector3Int v) => new(v.y, v.x, v.z);
+
+        public static Vector3 YZX(this Vector3 v) => new(v.y, v.z, v.x);
+        public static Vector3Int YZX(this Vector3Int v) => new(v.y, v.z, v.x);
+
+        public static Vector3 ZXY(this Vector3 v) => new(v.z, v.x, v.y);
+        public static Vector3Int ZXY(this Vector3Int v) => new(v.z, v.x, v.y);
+
+        public static Vector3 ZYX(this Vector3 v) => new(v.z, v.y, v.x);
+        public static Vector3Int ZYX(this Vector3Int v) => new(v.z, v.y, v.x);
+
 
         public static Vector2 WithX(this Vector2 v, float x) => new(x, v.y);
         public static Vector2 WithY(this Vector2 v, float y) => new(v.x, y);
