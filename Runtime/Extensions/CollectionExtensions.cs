@@ -30,5 +30,21 @@ namespace Kutie.Extensions {
 				i++;
 			}
 		}
+
+		public static IEnumerable<U> Map<T, U>(this IEnumerable<T> list, System.Func<T, U> func) {
+			foreach (var item in list) {
+				yield return func(item);
+			}
+		}
+
+		public static void ForEach<T>(this IEnumerable<T> list, System.Action<T> action) {
+			foreach (var item in list) {
+				action(item);
+			}
+		}
+
+		public static List<T> CollectList<T>(this IEnumerable<T> list) {
+			return new List<T>(list);
+		}
 	}
 }
