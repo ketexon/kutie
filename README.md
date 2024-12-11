@@ -38,7 +38,7 @@ It will also work if you just put the repo into `Assets` or into `Packages/com.k
 
 (Windows and Linux only right now...)
 
-This will create a Assets context menu for the project pane where you can open the folder in a terminal. On Windows, it checks the built in command prompts in this order:
+This will create an Assets context menu for the project pane where you can open the folder in a terminal. On Windows, it checks the built in command prompts in this order:
 
 - Windows Terminal
 - Pwsh (PowerShell 7)
@@ -52,7 +52,7 @@ the `Kutie.OS.Executable.Which` command.
 
 ### ColorExtensions
 
-- `string Color.ToHex(bool includeHex = true)`
+- `string Color.ToHex(bool includeAlpha = true)`
 - `Color Color.WithA(float a)`
 
 ### LayerMaskExtensions
@@ -61,13 +61,14 @@ the `Kutie.OS.Executable.Which` command.
 
 ### MonobehaviourExtensions
 
-- `Coroutine MonoBehaviour.Defer(System.Action callback, YieldInstruction yieldInstruction = null)`: The same as creating a coroutine that does callback after `yield return yieldInstruction`. Useful for making one-shop coroutines.
+- `Coroutine MonoBehaviour.Defer(System.Action callback, YieldInstruction yieldInstruction = null)`: The same as creating a coroutine that does `callback` after `yield return yieldInstruction`. Useful for making one-shot coroutines.
 
 ### VectorExtensions
 
 Projections
 - `Vector3 Vector3.ProjectXY(), Vector3.ProjectXZ(), Vector3.ProjectYZ()`: Projects onto plane. Eg. `(1,2,3).ProjectXZ() == (1,0,2)`. Useful in 2D for projecting onto the 2D plane, and useful in 3D for projecting onto the ground, etc.
-- `Vector2 Vector3.XY(), Vector3.XZ(), Vector3.YZ()`: Swizzling. Eg. `(1,2,3).XZ() == (1,3)`
+- `Vector2 Vector3.XY(), Vector3.XZ(), Vector3.YZ()`: Lower dimensional swizzling. Eg. `(1,2,3).XZ() == (1,3)`
+- `Vector3 Vector3.XYZ(), Vector3.XYZ(), Vector3.YXZ(), Vector3.YZX(), Vector3.ZXY(), Vector3.ZYX()`: other swizzling
 
 Mutators
 - `Vector3 Vector3.WithX(), Vector3.WithY(), Vector3.WithZ()`
@@ -100,17 +101,21 @@ Component-wise operations
 
 ## Math
 
-### Math
+### KMath
 
-- `class IntRange`
-  - Contains `Min, MaxExclusive`, as well as getters `Max = MaxInclusive`
-  - Contains `IntRange.Random`, which will sample the range
-- `Vector3 Math.Min(Vector3 v1, Vector3 v2)`: Component-wise min
-- `Vector3 Math.Max(Vector3 v1, Vector3 v2)`: Component-wise max
+- `Vector3 Min(Vector3 v1, Vector3 v2)`: Component-wise min
+- `Vector3 Max(Vector3 v1, Vector3 v2)`: Component-wise max
 - `float Rem(float a, float b), int Rem(int a, int b)`: Computed euclidean remainder (nonnegative equivalent to `a % b`). You can be sure that `a % c == b % c` if they have the same remainder, regardless of if they are negative.
 - `float NormalizeAngle360(float angle)`: normalized angle to `[0, 360)`
 - `float NormalizeAngle180(float angle)`: normalized angle to range `[-180, 180)`
 - `float ClampAngle(float angle, float min, float max)`: makes sure angle is between `min` and `max`, normalizing all angles
+
+### IntRange
+
+- `class IntRange`
+  - Better alternative to having 2 min/max fields in an object
+  - Contains `Min, MaxExclusive`, as well as getters `Max = MaxInclusive`
+  - Contains `IntRange.Random`, which will sample the range
 
 ### SpringVector3, SpringTransform
 
@@ -150,15 +155,15 @@ Similarly, there is `SpringFloat` and `SpringFloatValue` (a `MonoBehaviour` cont
 
 ## Physics
 
-- `class Physics.RaycastDistanceComparer : IComparer<RaycastHit>`: Implements `IComparer<RaycastHit>` to compare `RaycastHit` distances. Use this in `Array.Sort` or similar functions to sort an array of `RaycastHit`s by distance.
-- `int Physics.RaycastNonAllocSorted(..., IComparer<RaycastHit> comparer = null)`: Equivalent to `Physics.RaycastNonAlloc` but sorts afterwards, using the default comparer of `Kutie.Physics.RaycastDistanceComparer`
-- `int Physics.RaycastAllSorted(... IComparer<RaycastHit> comparer)`: Same as above but with `UnityEngine.Physics.RaycastAll`.
-- `int Physics.BoxCastNonAllocSorted(... IComparer<RaycastHit> comparer)`: Same as above but with `UnityEngine.Physics.BoxCastNonAlloc`.
-- `int Physics.BoxCastAllSorted(... IComparer<RaycastHit> comparer)`: Same as above but with `UnityEngine.Physics.BoxCastAll`.
+- `class KPhysics.RaycastDistanceComparer : IComparer<RaycastHit>`: Implements `IComparer<RaycastHit>` to compare `RaycastHit` distances. Use this in `Array.Sort` or similar functions to sort an array of `RaycastHit`s by distance.
+- `int KPhysics.RaycastNonAllocSorted(..., IComparer<RaycastHit> comparer = null)`: Equivalent to `Physics.RaycastNonAlloc` but sorts afterwards, using the default comparer of `Kutie.Physics.RaycastDistanceComparer`
+- `int KPhysics.RaycastAllSorted(... IComparer<RaycastHit> comparer)`: Same as above but with `UnityEngine.Physics.RaycastAll`.
+- `int KPhysics.BoxCastNonAllocSorted(... IComparer<RaycastHit> comparer)`: Same as above but with `UnityEngine.Physics.BoxCastNonAlloc`.
+- `int KPhysics.BoxCastAllSorted(... IComparer<RaycastHit> comparer)`: Same as above but with `UnityEngine.Physics.BoxCastAll`.
 
 ## Random
 
-- `Vector3 Random.Range(Vector3 min, Vector3 max)`: Component-wise random
+- `Vector3 KRandom.Range(Vector3 min, Vector3 max)`: Component-wise random
 
 ## Singleton
 
