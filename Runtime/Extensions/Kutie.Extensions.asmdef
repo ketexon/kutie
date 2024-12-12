@@ -1,7 +1,9 @@
 {
     "name": "Kutie.Extensions",
     "rootNamespace": "Kutie.Extensions",
-    "references": [],
+    "references": [
+        "GUID:2f52713382b2924468155a01869e851c"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

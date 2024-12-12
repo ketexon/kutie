@@ -1,4 +1,5 @@
 using UnityEngine;
+using Kutie;
 
 namespace Kutie.Extensions
 {
@@ -76,11 +77,33 @@ namespace Kutie.Extensions
         public static Vector3Int Divide(this Vector3Int a, Vector3Int b) => new(a.x / b.x, a.y / b.y, a.z / b.z);
         public static Vector3 Divide(this Vector3Int a, Vector3 b) => new(a.x / b.x, a.y / b.y, a.z / b.z);
 
-        public static Vector3Int Rem(this Vector3Int a, Vector3Int b) => new(a.x % b.x, a.y % b.y, a.z % b.z);
-        public static Vector3Int Rem(this Vector3Int a, int b) => new(a.x % b, a.y % b, a.z % b);
+        public static Vector3Int Mod(this Vector3Int a, Vector3Int b) => new(a.x % b.x, a.y % b.y, a.z % b.z);
+        public static Vector3Int Mod(this Vector3Int a, int b) => new(a.x % b, a.y % b, a.z % b);
 
-        public static Vector3 Rem(this Vector3 a, Vector3 b) => new(a.x % b.x, a.y % b.y, a.z % b.z);
-        public static Vector3 Rem(this Vector3 a, float b) => new(a.x % b, a.y % b, a.z % b);
+        public static Vector3 Mod(this Vector3 a, Vector3 b) => new(a.x % b.x, a.y % b.y, a.z % b.z);
+        public static Vector3 Mod(this Vector3 a, float b) => new(a.x % b, a.y % b, a.z % b);
+
+        public static Vector3Int Rem(this Vector3Int a, Vector3Int b) => new(
+            KMath.Rem(a.x, b.x),
+            KMath.Rem(a.y, b.y),
+            KMath.Rem(a.z, b.z)
+        );
+
+        public static Vector3Int Rem(this Vector3Int a, int b) => new(
+            KMath.Rem(a.x, b),
+            KMath.Rem(a.y, b),
+            KMath.Rem(a.z, b)
+        );
+
+        public static Vector2Int Rem(this Vector2Int a, Vector2Int b) => new(
+            KMath.Rem(a.x, b.x),
+            KMath.Rem(a.y, b.y)
+        );
+
+        public static Vector2Int Rem(this Vector2Int a, int b) => new(
+            KMath.Rem(a.x, b),
+            KMath.Rem(a.y, b)
+        );
 
         public static Vector2Int RoundToInt(this Vector2 v) => Vector2Int.RoundToInt(v);
         public static Vector3Int RoundToInt(this Vector3 v) => Vector3Int.RoundToInt(v);
