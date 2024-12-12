@@ -1,7 +1,39 @@
 # Kutie
 
-Kutie is a drop-in utilities library for Unity whose purpose is to provide small features that I think
-should be in Unity or C#, but aren't.
+Kutie is a drop-in utilities library for Unity whose purpose is to provide small features that I think should be in Unity or C#, but aren't.
+
+- [Kutie](#kutie)
+  - [Highlights](#highlights)
+  - [Installation](#installation)
+  - [Editor](#editor)
+    - [CommandPromptEditor](#commandprompteditor)
+  - [Extensions](#extensions)
+    - [ColorExtensions](#colorextensions)
+    - [LayerMaskExtensions](#layermaskextensions)
+    - [MonobehaviourExtensions](#monobehaviourextensions)
+    - [VectorExtensions](#vectorextensions)
+  - [Math](#math)
+    - [KMath](#kmath)
+    - [IntRange](#intrange)
+    - [SpringVector3, SpringTransform](#springvector3-springtransform)
+  - [Collections](#collections)
+    - [`KPriorityQueue`](#kpriorityqueue)
+    - [`KTree`](#ktree)
+  - [Algorithms](#algorithms)
+    - [Pathfinding](#pathfinding)
+  - [Inspector](#inspector)
+    - [`ReadOnlyAttribute`](#readonlyattribute)
+  - [OS](#os)
+    - [Executable](#executable)
+    - [Terminal](#terminal)
+  - [Physics](#physics)
+  - [Random](#random)
+  - [Singleton](#singleton)
+    - [SingletonMonoBehaviour](#singletonmonobehaviour)
+    - [SingletonScriptableObject](#singletonscriptableobject)
+  - [Time](#time)
+    - [TimeLayer and ScalableTimeLayer](#timelayer-and-scalabletimelayer)
+  - [Object](#object)
 
 ## Highlights
 
