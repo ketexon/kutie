@@ -84,5 +84,10 @@ namespace Kutie.Extensions
 
         public static Vector2Int RoundToInt(this Vector2 v) => Vector2Int.RoundToInt(v);
         public static Vector3Int RoundToInt(this Vector3 v) => Vector3Int.RoundToInt(v);
+
+        public static void Deconstruct(this Vector2 v, out float x, out float y) => (x, y) = (v.x, v.y);
+        public static void Deconstruct(this Vector2Int v, out int x, out int y) => (x, y) = (v.x, v.y);
+        public static void Deconstruct(this Vector3 v, out float x, out float y, out float z) => (x, y, z) = (v.x, v.y, v.z);
+        public static void Deconstruct(this Vector3Int v, out int x, out int y, out int z) => (x, y, z) = (v.x, v.y, v.z);
     }
 }

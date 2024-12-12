@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Kutie.Extensions {
 	public static class CollectionExtensions {
@@ -45,6 +46,39 @@ namespace Kutie.Extensions {
 
 		public static List<T> CollectList<T>(this IEnumerable<T> list) {
 			return new List<T>(list);
+		}
+
+		public static IEnumerable<(T, U)> Cartesian<T, U>(
+			this IEnumerable<T> list1,
+			IEnumerable<U> list2
+		) {
+			foreach (var item1 in list1) {
+				foreach (var item2 in list2) {
+					yield return (item1, item2);
+				}
+			}
+		}
+
+		public static T MinBy<T>(this IEnumerable<T> list, System.Func<T, float> func) {
+			T minItem = default;
+			float minValue = float.MaxValue;
+			foreach (var item in list) {
+				float value = func(item);
+				if (value < minValue) {
+					minValue = value;
+					minItem = item;
+				}
+			}
+			return minItem;
+		}
+
+		public static IEnumerable<T> Chain<T>(this IEnumerable<T> list, IEnumerable<T> other) {
+			foreach(var item in list) {
+				yield return item;
+			}
+			foreach(var item in other) {
+				yield return item;
+			}
 		}
 	}
 }

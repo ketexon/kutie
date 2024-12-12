@@ -1,8 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Kutie
 {
-    public static class KMath {
+    public static partial class KMath {
         public static Vector3 Min(Vector3 v1, Vector3 v2) => new(
             Mathf.Min(v1.x, v2.x),
             Mathf.Min(v1.y, v2.y),
@@ -33,5 +34,12 @@ namespace Kutie
                 return min;
             return max;
         }
+
+        public static List<Vector2Int> Directions4 = new() {
+            new(0, 1),
+            new(1, 0),
+            new(0, -1),
+            new(-1, 0)
+        };
     }
 }
