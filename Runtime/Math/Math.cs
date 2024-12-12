@@ -36,10 +36,10 @@ namespace Kutie
         }
 
         public static List<Vector2Int> Directions4 = new() {
-            new(0, 1),
-            new(1, 0),
-            new(0, -1),
-            new(-1, 0)
+            Vector2Int.up,
+            Vector2Int.left,
+            Vector2Int.right,
+            Vector2Int.down,
         };
     }
 }

@@ -66,20 +66,24 @@ the `Kutie.OS.Executable.Which` command.
 ### VectorExtensions
 
 Projections
+
 - `Vector3 Vector3.ProjectXY(), Vector3.ProjectXZ(), Vector3.ProjectYZ()`: Projects onto plane. Eg. `(1,2,3).ProjectXZ() == (1,0,2)`. Useful in 2D for projecting onto the 2D plane, and useful in 3D for projecting onto the ground, etc.
 - `Vector2 Vector3.XY(), Vector3.XZ(), Vector3.YZ()`: Lower dimensional swizzling. Eg. `(1,2,3).XZ() == (1,3)`
 - `Vector3 Vector3.XYZ(), Vector3.XYZ(), Vector3.YXZ(), Vector3.YZX(), Vector3.ZXY(), Vector3.ZYX()`: other swizzling
 
 Mutators
+
 - `Vector3 Vector3.WithX(), Vector3.WithY(), Vector3.WithZ()`
 - `Vector2 Vector2.WithX(), Vector2.WithY()`
 - `Vector3 Vector2.WithZ()`
 
 Geomtry
+
 - `float Vector3.Volume(), int Vector3Int.Volume()`
   - Finds the volume of a box with side lengths in the vector (note: NOT half lengths as used by `BoxCollider`)
 
 Component-wise operations
+
 - `Vector3 Vector3.Abs()`: Component-wise absolute value
 - Division
   - `Vector2 Vector2.Divide(Vector2 b), Vector2.Divide(Vector2Int b)`
@@ -99,6 +103,10 @@ Component-wise operations
   - `Vector3Int Vector3Int.Rem(Vector3Int b), Vector3Int.Rem(int b)`
   - `Vector3 Vector3.Rem(Vector3 b), Vector3.Rem(float b)`
 
+Deconstruction methods
+
+- Lets you do: `var (a, b) = new Vector2(1,2);`
+
 ## Math
 
 ### KMath
@@ -109,6 +117,7 @@ Component-wise operations
 - `float NormalizeAngle360(float angle)`: normalized angle to `[0, 360)`
 - `float NormalizeAngle180(float angle)`: normalized angle to range `[-180, 180)`
 - `float ClampAngle(float angle, float min, float max)`: makes sure angle is between `min` and `max`, normalizing all angles
+- `List<Vector2Int> Directions4 = new() { Vector2Int.up, Vector2Int.left, Vector2Int.right, Vector2Int.down };`
 
 ### IntRange
 
@@ -142,6 +151,49 @@ Debug.Log(springVector.CurrentValue);
 `SpringTransform` does this automatically to the current transform with the `TargetValue` set to the position of the `Target` transform. In addition, it provides an editor to preview the value changing, and allows you to change the values of `SpringVector3` at runtime.
 
 Similarly, there is `SpringFloat` and `SpringFloatValue` (a `MonoBehaviour` container for `SpringFloat`).
+
+## Collections
+
+### `KPriorityQueue`
+
+A rip of C#'s [priority queue](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.priorityqueue-2?view=net-9.0) class that works in Unity's C# and .Net versions.
+
+### `KTree`
+
+A simple tree! Work in progress, not yet serializable...
+
+## Algorithms
+
+### Pathfinding
+
+This provides 2 simple pathfinding algorithms for unweighted graphs on a grid: A* and BFS.
+
+Both use predicates for whether a cell is a target cell and whether a cell is walkable. A* passes a heuristic as a function, which you can use euclidean distance for.
+
+Implementation-wise, these are probably not as fast as they could be.
+
+```c#
+List<Vector2Int> Algorithm.AStar(
+  Vector2Int startCell,
+  Func<Vector2Int, float> heuristic,
+  Predicate<Vector2Int> isTarget,
+  Predicate<Vector2Int> isWalkable
+)
+```
+
+```c#
+List<Vector2Int> Algorithm.BFS(
+  Vector2Int startCell,
+  Predicate<Vector2Int> isTarget,
+  Predicate<Vector2Int> isWalkable
+)
+```
+
+## Inspector
+
+### `ReadOnlyAttribute`
+
+An property attribute that renders its property drawer as readonly (`VisualElement.SetEnabled(false)`).
 
 ## OS
 
