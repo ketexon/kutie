@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Kutie.Extensions
 {
-    public static class MonobehaviourExtensions
+    public static partial class MonobehaviourExtensions
     {
         public static Coroutine Defer(this MonoBehaviour behaviour, System.Action action, YieldInstruction yieldInstruction = null)
         {
@@ -13,6 +13,14 @@ namespace Kutie.Extensions
                 action();
             }
             return behaviour.StartCoroutine(Impl());
+        }
+
+        public static void ClearChildren(this MonoBehaviour behaviour)
+        {
+            foreach (Transform child in behaviour.transform)
+            {
+                Object.Destroy(child.gameObject);
+            }
         }
     }
 }

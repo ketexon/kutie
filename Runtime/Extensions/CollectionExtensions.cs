@@ -80,5 +80,21 @@ namespace Kutie.Extensions {
 				yield return item;
 			}
 		}
+
+		public static IEnumerable<T> Skip<T>(this IEnumerable<T> list, int n) {
+			int i = 0;
+			foreach (var item in list) {
+				if (i >= n) {
+					yield return item;
+				}
+				i++;
+			}
+		}
+
+		public static IEnumerable<T> Skip<T>(this IList<T> list, int n) {
+			for(int i = n; i < list.Count; i++) {
+				yield return list[i];
+			}
+		}
 	}
 }
