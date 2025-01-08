@@ -11,15 +11,22 @@ namespace Kutie {
 	public class PIDParameters {
 		public PIDControllerDerivativeMode DerivativeMode = PIDControllerDerivativeMode.Value;
 
-		public bool Angle = false;
 		public float ProportionalGain = 1;
 		public float IntegralGain = 0;
 		public float DerivativeGain = 0;
 		public float MaxIntegral = 1;
 
-		public float MinOutput = -1;
 		public float MaxOutput = 1;
 	}
+
+	[System.Serializable]
+	public class PIDFloatParameters : PIDParameters {
+		public bool Angle = false;
+		public float MinOutput = -1;
+	}
+
+	[System.Serializable]
+	public class PIDVector3Parameters : PIDParameters {}
 
 	public interface IPIDController<T> {
 		public T TargetValue { get; set; }
@@ -31,8 +38,8 @@ namespace Kutie {
 	[System.Serializable]
 	public class PIDFloatController : IPIDController<float> {
 		[SerializeField]
-		PIDParameters _parameters = new();
-		public PIDParameters Parameters {
+		PIDFloatParameters _parameters = new();
+		public PIDFloatParameters Parameters {
 			get => _parameters;
 			set => _parameters = value;
 		}
@@ -58,7 +65,7 @@ namespace Kutie {
 
 			integral += error * dt;
 			integral = Mathf.Clamp(integral, -Parameters.MaxIntegral, Parameters.MaxIntegral);
-			float I = Parameters. IntegralGain * integral;
+			float I = Parameters.IntegralGain * integral;
 
 			float D = 0;
 			if(initialized){
@@ -92,52 +99,53 @@ namespace Kutie {
 	[System.Serializable]
 	public class PIDVector3Controller : IPIDController<Vector3> {
 		[SerializeField]
-		PIDParameters _parameters = new();
-		public PIDParameters Parameters {
+		PIDVector3Parameters _parameters = new();
+		public PIDVector3Parameters Parameters {
 			get => _parameters;
-			set {
-				_parameters = value;
-				xController.Parameters = value;
-				yController.Parameters = value;
-				zController.Parameters = value;
-			}
+			set => _parameters = value;
 		}
 
-		[SerializeField, HideInInspector]
-		PIDFloatController xController = new();
+		public Vector3 TargetValue { get; set; } = Vector3.zero;
+		public Vector3 CurrentValue { get; set; } = Vector3.zero;
 
-		[SerializeField, HideInInspector]
-		PIDFloatController yController = new();
+		public Vector3 Output { get; private set; } = Vector3.zero;
 
-		[SerializeField, HideInInspector]
-		PIDFloatController zController = new();
+		bool initialized = false;
+		Vector3 lastValue = Vector3.zero;
+		Vector3 lastError = Vector3.zero;
 
-		public Vector3 TargetValue {
-			get => new(xController.CurrentValue, yController.CurrentValue, zController.CurrentValue);
-			set {
-				xController.TargetValue = value.x;
-				yController.TargetValue = value.y;
-				zController.TargetValue = value.z;
-			}
-		}
-
-		public Vector3 CurrentValue {
-			get => new(xController.CurrentValue, yController.CurrentValue, zController.CurrentValue);
-			set {
-				xController.CurrentValue = value.x;
-				yController.CurrentValue = value.y;
-				zController.CurrentValue = value.z;
-			}
-		}
-
-		public Vector3 Output {
-			get => new(xController.Output, yController.Output, zController.Output);
-		}
+		Vector3 integral = Vector3.zero;
 
 		public Vector3 Update(float dt) {
-			xController.Update(dt);
-			yController.Update(dt);
-			zController.Update(dt);
+			Vector3 error = TargetValue - CurrentValue;
+
+			Vector3 P = Parameters.ProportionalGain * error;
+
+			integral += error * dt;
+			integral = Vector3.ClampMagnitude(
+				integral,
+				Parameters.MaxIntegral
+			);
+			Vector3 I = Parameters.IntegralGain * integral;
+
+			Vector3 D = Vector3.zero;
+			if(initialized){
+				Vector3 delta;
+				if(Parameters.DerivativeMode == PIDControllerDerivativeMode.Value) {
+					delta = -(CurrentValue - lastValue);
+				} else {
+					delta = error - lastError;
+				}
+				D = Parameters.DerivativeGain * delta / dt;
+			}
+			else {
+				initialized = true;
+			}
+
+			Output = Vector3.ClampMagnitude(P + I + D, Parameters.MaxOutput);
+
+			lastError = error;
+			lastValue = CurrentValue;
 
 			return Output;
 		}
