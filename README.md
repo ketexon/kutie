@@ -35,6 +35,10 @@ Kutie is a drop-in utilities library for Unity whose purpose is to provide small
     - [TimeLayer and ScalableTimeLayer](#timelayer-and-scalabletimelayer)
   - [Object](#object)
 
+## Notes
+
+Not everything is documented here. The source is pretty simple, so don't be afraid to look through it!
+
 ## Highlights
 
 - Adds "Open in Terminal" to the project pane (this was the reason I started this library lol)
