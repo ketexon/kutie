@@ -13,7 +13,7 @@ namespace Kutie {
 		[SerializeField]
 		float _targetValue;
 
-		public float CurrentValue { get => _currentValue; private set => _currentValue = value; }
+		public float CurrentValue { get => _currentValue; set => _currentValue = value; }
 		public float TargetValue { get => _targetValue; set => _targetValue = value; }
 		public float Velocity { get; set; }
 
