@@ -21,10 +21,29 @@ namespace Kutie.Extensions
 
         public static void ClearChildren(this MonoBehaviour behaviour)
         {
+            #if UNITY_EDITOR
+            if (EditorApplication.isPlaying)
+            {
+                foreach (Transform child in behaviour.transform)
+                {
+                    Object.Destroy(child.gameObject);
+                }
+            }
+            else
+            {
+                var nChildren = behaviour.transform.childCount;
+                for(int i = 0; i < nChildren; ++i){
+                    Object.DestroyImmediate(
+                        behaviour.transform.GetChild(0).gameObject
+                    );
+                }
+            }
+            #else
             foreach (Transform child in behaviour.transform)
             {
-                behaviour.DestroySmart(child.gameObject);
+                Object.Destroy(child.gameObject);
             }
+            #endif
         }
 
         public static void DestroySmart(this MonoBehaviour behaviour, Object obj)

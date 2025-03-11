@@ -1,7 +1,9 @@
-using UnityEditor;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
-namespace Kutie.Editor {
+namespace Kutie {
 	public static partial class KPrefabUtility {
 		/// <summary>
 		/// Functions as both PrefabUtility.InstantiatePrefab and Object.Instantiate.
@@ -21,7 +23,7 @@ namespace Kutie.Editor {
 			Quaternion? rotation = null,
 			Transform parent = null
 		){
-			if(Application.isPlaying){
+			GameObject SpawnNormally(){
 				if(parent){
 					return Object.Instantiate(
 						prefab,
@@ -38,6 +40,10 @@ namespace Kutie.Editor {
 					);
 				}
 			}
+			#if UNITY_EDITOR
+			if(EditorApplication.isPlaying){
+				return SpawnNormally();
+			}
 			var go = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
 			if(parent){
 				go.transform.SetParent(parent);
@@ -47,6 +53,9 @@ namespace Kutie.Editor {
 				rotation ?? prefab.transform.rotation
 			);
 			return go;
+			#else
+			return SpawnNormally();
+			#endif
 		}
 	}
 }
