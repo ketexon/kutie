@@ -32,6 +32,14 @@ namespace Kutie.Extensions {
 			}
 		}
 
+		public static IEnumerable<(T, U)> Zip<T, U>(this IEnumerable<T> list1, IEnumerable<U> list2) {
+			var enumerator1 = list1.GetEnumerator();
+			var enumerator2 = list2.GetEnumerator();
+			while (enumerator1.MoveNext() && enumerator2.MoveNext()) {
+				yield return (enumerator1.Current, enumerator2.Current);
+			}
+		}
+
 		public static IEnumerable<U> Map<T, U>(this IEnumerable<T> list, System.Func<T, U> func) {
 			foreach (var item in list) {
 				yield return func(item);

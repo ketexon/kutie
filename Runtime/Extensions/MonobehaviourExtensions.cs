@@ -1,6 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace Kutie.Extensions
 {
     public static partial class MonobehaviourExtensions
@@ -19,8 +23,24 @@ namespace Kutie.Extensions
         {
             foreach (Transform child in behaviour.transform)
             {
-                Object.Destroy(child.gameObject);
+                behaviour.DestroySmart(child.gameObject);
             }
+        }
+
+        public static void DestroySmart(this MonoBehaviour behaviour, Object obj)
+        {
+            #if UNITY_EDITOR
+            if (EditorApplication.isPlaying)
+            {
+                Object.Destroy(obj);
+            }
+            else
+            {
+                Object.DestroyImmediate(obj);
+            }
+            #else
+            Object.Destroy(obj);
+            #endif
         }
     }
 }
