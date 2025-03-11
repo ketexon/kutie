@@ -16,6 +16,24 @@ namespace Kutie
             Mathf.Max(v1.z, v2.z)
         );
 
+        public static Vector3 RandomUnitVector3() {
+            float polar = Random.Range(0, 2 * Mathf.PI);
+            float elevation = Random.Range(0, Mathf.PI);
+            return new Vector3(
+                Mathf.Cos(polar) * Mathf.Sin(elevation),
+                Mathf.Sin(polar) * Mathf.Sin(elevation),
+                Mathf.Cos(elevation)
+            );
+        }
+
+        public static Vector2 RandomUnitVector2() {
+            float angle = Random.Range(0, 2 * Mathf.PI);
+            return new Vector2(
+                Mathf.Cos(angle),
+                Mathf.Sin(angle)
+            );
+        }
+
         public static float Rem(float a, float b) => (a % b + b) % b;
         public static int Rem(int a, int b) => (a % b + b) % b;
         public static float NormalizeAngle360(float angle) => Rem(angle, 360);
