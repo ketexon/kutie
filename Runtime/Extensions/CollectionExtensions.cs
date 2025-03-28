@@ -4,10 +4,16 @@ using System.Linq;
 namespace Kutie.Extensions {
 	public static class CollectionExtensions {
 		public static T Sample<T>(this IList<T> list) {
+			if (list.Count == 0) {
+				throw new System.ArgumentException("Cannot sample from an empty list.");
+			}
 			return list[UnityEngine.Random.Range(0, list.Count)];
 		}
 
 		public static List<T> Sample<T>(this List<T> list, int n) {
+			if (list.Count == 0) {
+				throw new System.ArgumentException("Cannot sample from an empty list.");
+			}
 			return list.Shuffle().GetRange(0, n);
 		}
 
